@@ -1,6 +1,7 @@
 // int seed = 400;
 //int seed = 689;
-int seed = (int)random(1, 1000);
+int seed = 198;
+// int seed = (int)random(1, 1000);
 float smoothness = 2;
 float roadWidth = 10;
 color roadColour = color(35, 26, 27);
@@ -17,12 +18,12 @@ void setup() {
   strokeJoin(ROUND);
   surface.setLocation(0,0);
   //surface.setResizable(true);
-  roadNetwork = createNoise(roadColour, 0.1, 50);
+  roadNetwork = createNoise(roadColour, 0.2, 0.01);
   PGraphics roadMask = createRoads(color(255));
   
   roadNetwork.mask(roadMask);
   
-  bgNoise = createNoise(bgColour, 0.08, 0.02);
+  bgNoise = createNoise(bgColour, 0.2, 0.01);
   
 }
 
@@ -58,7 +59,7 @@ PGraphics createNoise(color col, float weight, float scale) {
   noiseImage.beginDraw();
   for (int x = 0; x < noiseImage.width; x++) {
     for (int y = 0; y < noiseImage.height; y++) {
-      float noiseValue = noise((x/width)*scale,(y/height)*scale);
+      float noiseValue = noise(x * scale, y * scale);
       noiseImage.set(x, y, col + color(noiseValue*255*weight));
     }
   }
